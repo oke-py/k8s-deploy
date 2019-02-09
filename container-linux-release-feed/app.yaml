@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: container-linux
+  labels:
+    app: container-linux-release-feed
+data:
+  channel: stable
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: container-linux-release-feed
+spec:
+  schedule: "* 9 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: container-linux-release-feed
+            image: okepy/container-linux-release-feed:0.1.0
+            env:
+            - name: CHANNEL
+              valueFrom:
+                configMapKeyRef:
+                  name: container-linux
+                  key: channel
+            - name: SLACK_WEBHOOK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: slack
+                  key: webhook-url
+          restartPolicy: OnFailure
