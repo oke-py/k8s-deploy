@@ -20,7 +20,7 @@ spec:
         spec:
           containers:
           - name: container-linux-release-feed
-            image: okepy/container-linux-release-feed:0.1.0
+            image: okepy/container-linux-release-feed:0.1.1
             env:
             - name: CHANNEL
               valueFrom:
