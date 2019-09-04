@@ -1,4 +1,12 @@
-replicas: 1
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server
+      access: proxy
+      isDefault: true
 
 plugins:
 - grafana-kubernetes-app
