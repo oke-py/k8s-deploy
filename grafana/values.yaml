@@ -1,2 +1,4 @@
+replicas: 4
+
 plugins:
 - grafana-kubernetes-app
